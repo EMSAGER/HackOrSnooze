@@ -51,7 +51,9 @@ class StoryList {
     // Note presence of `static` keyword: this indicates that getStories is
     //  **not** an instance method. Rather, it is a method that is called on the
     //  class directly. Why doesn't it make sense for getStories to be an
-    //  instance method?
+    //  instance method? -wan't to change the entire class from the beginning instead of adding a new method to a new instance
+          //Instance methods, which act upon individual instances of a class.
+          //Static methods, which do not rely on an instance of a class.
 
     // query the /stories endpoint (no auth required)
     const response = await axios({
@@ -72,10 +74,37 @@ class StoryList {
    *
    * Returns the new Story instance
    */
+  //when adding a new story to the StoryList then story object is adding to the first index of the array the top of the list.
+  //array methods to be used to add/remove something from the start of the array: 
+  //array.shift()--removes an element from the array (save for later when deleting stories!)
+  //array.unshift()--adds a new element to the array
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory(user, {title, author, url}) {
+    //per API attributes are the token and story object
+    const token = user.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/stories`,
+      method: "POST",
+      data: {token, story:{title, author, url}},
+    });
+          //need to create a new Story instance
+    const story = new Story(response.data.story);
+    this.stories.unshift(story);
+    user.ownStories.unshift(story);
+    return story;
+                                                      //let newStory = response.data;
+                                                      // let { newStory } = response.data;
+
+                                                      // return new Story(
+                                                      //   {
+                                                      //     title: newStory.title,
+                                                      //     author: newStory.author,
+                                                      //     url: newStory.url,
+                                                      //   }
+                                                      // );
+                                                      //return newStory;
   }
+  
 }
 
 
@@ -123,7 +152,7 @@ class User {
       data: { user: { username, password, name } },
     });
 
-    let { user } = response.data
+    let { user } = response.data;
 
     return new User(
       {

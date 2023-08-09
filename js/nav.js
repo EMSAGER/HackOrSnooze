@@ -6,8 +6,8 @@
 
 /** Show main list of all stories when click site name */
 
-function navAllStories(evt) {
-  console.debug("navAllStories", evt);
+function navAllStories(e) {
+  console.debug("navAllStories", e);
   hidePageComponents();
   putStoriesOnPage();
 }
@@ -16,8 +16,8 @@ $body.on("click", "#nav-all", navAllStories);
 
 /** Show login/signup on click on "login" */
 
-function navLoginClick(evt) {
-  console.debug("navLoginClick", evt);
+function navLoginClick(e) {
+  console.debug("navLoginClick", e);
   hidePageComponents();
   $loginForm.show();
   $signupForm.show();

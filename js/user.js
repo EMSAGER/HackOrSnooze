@@ -9,9 +9,9 @@ let currentUser;
 
 /** Handle login form submission. If login ok, sets up the user instance */
 
-async function login(evt) {
-  console.debug("login", evt);
-  evt.preventDefault();
+async function login(e) {
+  console.debug("login", e);
+  e.preventDefault();
 
   // grab the username and password
   const username = $("#login-username").val();
@@ -31,9 +31,9 @@ $loginForm.on("submit", login);
 
 /** Handle signup form submission. */
 
-async function signup(evt) {
-  console.debug("signup", evt);
-  evt.preventDefault();
+async function signup(e) {
+  console.debug("signup", e);
+  e.preventDefault();
 
   const name = $("#signup-name").val();
   const username = $("#signup-username").val();
