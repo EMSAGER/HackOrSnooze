@@ -72,7 +72,7 @@ class StoryList {
    * - user - the current instance of User who will post the story
    * - obj of {title, author, url}
    *
-   * Returns the new Story instance
+   * Returns the new Story instance {{= new Story(data_source)} will be used}
    */
   //when adding a new story to the StoryList then story object is adding to the first index of the array the top of the list.
   //array methods to be used to add/remove something from the start of the array: 

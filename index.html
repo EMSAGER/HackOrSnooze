@@ -37,6 +37,9 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+  <div class="nav-item">
+    <a class="nav-link" href="#" id="nav-story-submit"> | submit</a>
+  </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
@@ -48,25 +51,24 @@
 <section class="stories-container container">
     <!-- Add Story form -->
     <form
-    action="#"
-    id="addStory-form"
-    class="account-form hidden"
-    method="post">
-  <h4>Create Account</h4>
-  <div class="addStory-input">
-    <label for="addStory-author-name" placeholder="Author Name">Author: </label>
-    <input id="addStory-author-name" type="text">
-  </div>
-  <div class="addStory-input">
-    <label for="addStory-story-title" placeholder="Story Title">Story Title: </label>
-    <input id="addStory-story-title" type="text">
-  </div>
-  <div class="addStory-input">
-    <label for="addStory-story-url" placeholder="Story URL">Story URL: </label>
-    <input id="addStory-story-url" type="url">
-  </div>
-  <button type="submit" id="addStory-button">Submit</button>
-</form>
+      action="#"
+      id="addstory-form"
+      class="addstory-form hidden"
+      method="post">
+        <div class="addstory-input">
+          <label for="addstory-author">Author: </label>
+          <input id="addstory-author" type="text" placeholder="Author Name">
+        </div>
+        <div class="addstory-input">
+          <label for="addstory-title">Title: </label>
+          <input id="addstory-title" type="text" placeholder="Story Title">
+        </div>
+        <div class="addstory-input">
+          <label for="addstory-url">URL: </label>
+          <input id="addstory-url" type="url" placeholder="Story URL">
+        </div>
+        <button type="submit" id="addstory-button">Submit</button>
+    </form>
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
@@ -102,15 +104,15 @@
       method="post">
     <h4>Create Account</h4>
     <div class="login-input">
-      <label for="signup-name">name</label>
+      <label for="signup-name">Name: </label>
       <input id="signup-name" autocapitalize="words">
     </div>
     <div class="login-input">
-      <label for="signup-username">username</label>
+      <label for="signup-username">Username: </label>
       <input id="signup-username" autocomplete="new-username">
     </div>
     <div class="login-input">
-      <label for="signup-password">password</label>
+      <label for="signup-password">Password: </label>
       <input id="signup-password" autocomplete="new-password" type="password">
     </div>
     <button type="submit">create account</button>
