@@ -10,6 +10,7 @@ function navAllStories(e) {
   console.debug("navAllStories", e);
   hidePageComponents();
   putStoriesOnPage();
+  $addStoryForm.hide();
 }
 
 $body.on("click", "#nav-all", navAllStories);
