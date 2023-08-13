@@ -29,6 +29,7 @@ const $storyURL = $("#addstory-url");
 
 function hidePageComponents() {
   const components = [
+    $addStoryForm,
     $allStoriesList,
     $loginForm,
     $signupForm,
