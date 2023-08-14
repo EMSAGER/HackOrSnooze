@@ -47,15 +47,15 @@ class StoryList {
    *  - returns the StoryList instance.
    */
 
+      // Note presence of `static` keyword: this indicates that getStories is
+          //  **not** an instance method. Rather, it is a method that is called on the
+          //  class directly. Why doesn't it make sense for getStories to be an
+          //  instance method? -wan't to change the entire class from the beginning instead of adding a new method to a new instance
+                //Instance methods, which act upon individual instances of a class.
+                //Static methods, which do not rely on an instance of a class.
+          // query the /stories endpoint (no auth required)
   static async getStories() {
-    // Note presence of `static` keyword: this indicates that getStories is
-    //  **not** an instance method. Rather, it is a method that is called on the
-    //  class directly. Why doesn't it make sense for getStories to be an
-    //  instance method? -wan't to change the entire class from the beginning instead of adding a new method to a new instance
-          //Instance methods, which act upon individual instances of a class.
-          //Static methods, which do not rely on an instance of a class.
-
-    // query the /stories endpoint (no auth required)
+    
     const response = await axios({
       url: `${BASE_URL}/stories`,
       method: "GET",
@@ -91,18 +91,8 @@ class StoryList {
     const story = new Story(response.data.story);
     this.stories.unshift(story);
     user.ownStories.unshift(story);
-    return story;
-                                                      //let newStory = response.data;
-                                                      // let { newStory } = response.data;
 
-                                                      // return new Story(
-                                                      //   {
-                                                      //     title: newStory.title,
-                                                      //     author: newStory.author,
-                                                      //     url: newStory.url,
-                                                      //   }
-                                                      // );
-                                                      //return newStory;
+    return story;
   }
   
 }

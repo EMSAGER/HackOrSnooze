@@ -56,8 +56,8 @@ $signupForm.on("submit", signup);
  * Remove their credentials from localStorage and refresh page
  */
 
-function logout(evt) {
-  console.debug("logout", evt);
+function logout(e) {
+  console.debug("logout", e);
   localStorage.clear();
   location.reload();
 }

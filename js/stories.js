@@ -38,7 +38,7 @@ function generateStoryMarkup(story) {
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
 function putStoriesOnPage() {
-  console.debug("putStoriesOnPage");
+  //console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
 
@@ -50,3 +50,29 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+
+async function submitNewStoryForm(e){
+  // console.debug("submitNewStoryForm", e);
+  e.preventDefault(); //prevent a submit form default
+            //1.add your constants from the form
+  const title = $("#addstory-title").val();
+  const author = $("#addstory-author").val();
+  const url = $("#addstory-url").val();
+  const username = currentUser.username;
+  const storyData = {title, url, author, username };
+
+  const story = await storyList.addStory(currentUser, storyData);
+  //console.log(storyData);
+            //2. call the addStory method
+  
+  const $story = generateStoryMarkup(story);
+  //           //3. put new story on page
+  $allStoriesList.prepend($story);
+                //4. form isn't clearing - 
+  $addStoryForm.trigger("reset");
+                //5. need to hide form but in a GRACEFUL manner not abrupt
+  $addStoryForm.hide();
+}
+
+$addStoryForm.on("submit", submitNewStoryForm)
