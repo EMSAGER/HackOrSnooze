@@ -41,6 +41,19 @@ function navStoryClick(e){
   // console.log("submit was clicked");
   console.debug("navStoryClick", e);
   $addStoryForm.show();
+  $allStoriesList.show();
 }
 
 $navStorySubmit.on("click", navStoryClick);
+
+/**When a signed in user clicks on favorite nav bar, the favorite list will populate */
+
+function navFavoriteClick(e){
+  console.log("Favorite was clicked");
+  
+  $allStoriesList.hide();
+  $addStoryForm.hide();
+  $favoriteStoriesList.show();
+}
+
+$navfavorite.on("click", navFavoriteClick);
