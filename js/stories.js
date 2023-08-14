@@ -53,7 +53,7 @@ function putStoriesOnPage() {
 
 
 async function submitNewStoryForm(e){
-  // console.debug("submitNewStoryForm", e);
+  console.debug("submitNewStoryForm", e);
   e.preventDefault(); //prevent a submit form default
             //1.add your constants from the form
   const title = $("#addstory-title").val();

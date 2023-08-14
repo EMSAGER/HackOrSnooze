@@ -212,4 +212,22 @@ class User {
       return null;
     }
   }
+
+  async addFavoriteStory(){
+    this.favorites.push(response);
+    console.log(User.favorites);
+  }
+
+  async saveUserFavoriteStories(story){
+    const token = this.loginToken;
+
+    const response = await axios({
+      url: `${BASE_URL}/user/${this.username}/favorites/${story.storyId}`,
+      method: "POST",
+      data: token,
+    })
+    return response;
+  }
+
+ 
 }
