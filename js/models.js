@@ -213,21 +213,19 @@ class User {
     }
   }
 
-  async addFavoriteStory(){
-    this.favorites.push(response);
-    console.log(User.favorites);
+  async addFavoriteStory(story){
+    this.favorites.push(story);
+    await this.addOrRemoveFavorite(add,story);
   }
 
-  async saveUserFavoriteStories(story){
+  async addOrRemoveFavorite(action, story){
     const token = this.loginToken;
-
-    const response = await axios({
+              //if add is true - post, if false, delete
+    const Method = action === "add" ? "POST" : "DELETE";
+    await axios({
       url: `${BASE_URL}/user/${this.username}/favorites/${story.storyId}`,
-      method: "POST",
-      data: token,
+      method: Method,
+      data: {token},
     })
-    return response;
   }
-
- 
 }

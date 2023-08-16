@@ -49,7 +49,7 @@ $navStorySubmit.on("click", navStoryClick);
 /**When a signed in user clicks on favorite nav bar, the favorite list will populate */
 
 function navFavoriteClick(e){
-  console.log("Favorite was clicked");
+  //console.log("Favorite was clicked");
   
   $allStoriesList.hide();
   $addStoryForm.hide();
@@ -57,3 +57,12 @@ function navFavoriteClick(e){
 }
 
 $navfavorite.on("click", navFavoriteClick);
+
+/**When a signed in user clicks on ownStories nav bar, their ownstories list will populate */
+
+function navMyStoriesClick(e){
+  console.log("ownStories was clicked");
+  // $allStoriesList.hide();
+  // $addStoryForm.hide();
+  // $myStoriesList.show();
+}
