@@ -22,8 +22,8 @@ const $addStoryForm = $(".addstory-form");
 const $favoriteStoriesList = $("#favorite-stories-list");
 const $myStoriesList = $("#my-stories-list");
 
-const $clickedStar = $(".CLICKED");
-const $unclickedStar = $(".UNCLICKED");
+// const $clickedStar = $(".CLICKED");
+// const $unclickedStar = $(".UNCLICKED");
 
 
 /** To make it easier for individual components to show just themselves, this

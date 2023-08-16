@@ -79,3 +79,8 @@ async function submitNewStoryForm(e){
 
 $addStoryForm.on("submit", submitNewStoryForm)
 
+
+
+//allow users to favorite and unfavorite a story
+
+
