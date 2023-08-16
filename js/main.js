@@ -16,10 +16,12 @@ const $navLogOut = $("#nav-logout");
 
 const $navStorySubmit = $("#nav-story-submit");
 const $navfavorite = $("#nav-favorite");
-const $myStoriesList = $("#nav-my-story");
+const $navMyStories = $("#nav-my-story");
 
 const $addStoryForm = $(".addstory-form");
 const $favoriteStoriesList = $("#favorite-stories-list");
+const $myStoriesList = $("#my-stories-list");
+
 const $clickedStar = $(".CLICKED");
 const $unclickedStar = $(".UNCLICKED");
 
