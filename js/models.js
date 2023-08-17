@@ -214,9 +214,8 @@ class User {
   }
 
   async addFavoriteStory(story){
-    
     this.favorites.push(story);
-    await this.addOrRemoveFavorite("ACTION",story);
+    await this.addOrRemoveFavorite("add",story);
   }
 
         //filter will find the favorites to remove them
@@ -227,7 +226,7 @@ class User {
   async addOrRemoveFavorite(action, story){
     const token = this.loginToken;
               //if add is true - post, if false, delete
-    const Method = action === "ACTION" ? "POST" : "DELETE";
+    const Method = action === "add" ? "POST" : "DELETE";
     await axios({
       url: `${BASE_URL}/user/${this.username}/favorites/${story.storyId}`,
       method: Method,

@@ -21,12 +21,14 @@ async function getAndShowStoriesOnStart() {
 
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
-
+    //when generating story markup, the application should cehceck to see if a user is signed in first. 
+    //call Boolean to check True/FAlse if user is signed in
+      //if(signedIn !== false), show stars
+  const signedIn = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-      <i class="far fa-star UNCLICKED"></i>
-      <i class="fas fa-star CLICKED" style="display:none"></i>
+     
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
