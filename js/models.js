@@ -218,9 +218,10 @@ class User {
     await this.addOrRemoveFavorite("add",story);
   }
 
-        //filter will find the favorites to remove them
+        //filter will find the favorites to remove selected story 
   async removeFavoriteStory(story){
-
+    this.favorites = this.favorites.filter(s=> s.storyId !== story.storyId);
+    await this.addOrRemoveFavorite("remove",story);
   }
 
   async addOrRemoveFavorite(action, story){
@@ -232,5 +233,12 @@ class User {
       method: Method,
       data: {token},
     })
+  }
+
+  //is this story a favorite of the user? Create a method that shows a user story favorite
+      //true|false test of whether an element is true in array & returns the true elements
+      // element.some(p1 => p2 === p3)
+  isFavorite(story){
+    return this.favorites(s => s.storyId === story.storyId);
   }
 }
