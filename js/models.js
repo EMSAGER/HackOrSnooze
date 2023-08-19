@@ -228,17 +228,18 @@ class User {
     const token = this.loginToken;
               //if add is true - post, if false, delete
     const Method = action === "add" ? "POST" : "DELETE";
+    // console.log(`${BASE_URL}/users/${this.username}/favorites/${story.storyId}`);
     await axios({
-      url: `${BASE_URL}/user/${this.username}/favorites/${story.storyId}`,
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
       method: Method,
       data: {token},
-    })
+      });
   }
 
   //is this story a favorite of the user? Create a method that shows a user story favorite
       //true|false test of whether an element is true in array & returns the true elements
       // element.some(p1 => p2 === p3)
   isFavorite(story){
-    return this.favorites(s => s.storyId === story.storyId);
+    console.log( this.favorites.some(s => s.storyId === story.storyId));
   }
 }
