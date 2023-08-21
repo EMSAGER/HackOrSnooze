@@ -1,3 +1,5 @@
+//contains code to show/hide things in the navigation bar, and well as code for when a user clicks in that bar.
+
 "use strict";
 
 /******************************************************************************
@@ -7,7 +9,7 @@
 /** Show main list of all stories when click site name */
 
 function navAllStories(e) {
-  console.debug("navAllStories", e);
+  //console.debug("navAllStories", e);
   hidePageComponents();
   putStoriesOnPage();
   $addStoryForm.hide();
@@ -18,7 +20,7 @@ $body.on("click", "#nav-all", navAllStories);
 /** Show login/signup on click on "login" */
 
 function navLoginClick(e) {
-  console.debug("navLoginClick", e);
+  //console.debug("navLoginClick", e);
   hidePageComponents();
   $loginForm.show();
   $signupForm.show();
@@ -29,7 +31,7 @@ $navLogin.on("click", navLoginClick);
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
-  console.debug("updateNavOnLogin");
+  //console.debug("updateNavOnLogin");
   $(".main-nav-links").show();
   $navLogin.hide();
   $navLogOut.show();
@@ -39,7 +41,7 @@ function updateNavOnLogin() {
 /** When a signed in user clicks on submit nav bar, the add story form will show */
 function navStoryClick(e){
   // console.log("submit was clicked");
-  console.debug("navStoryClick", e);
+  //console.debug("navStoryClick", e);
   $addStoryForm.show();
   $allStoriesList.show();
 }
@@ -52,8 +54,7 @@ function navFavoriteClick(e){
   //console.log("Favorite was clicked");
   console.debug("navFavoriteClick", e);
   $allStoriesList.hide();
-  $addStoryForm.hide();
-  $favoriteStoriesList.show();
+  putFavoriteOnListPage();
 }
 
 $navfavorite.on("click", navFavoriteClick);
@@ -62,7 +63,7 @@ $navfavorite.on("click", navFavoriteClick);
 
 function navMyStoriesClick(e){
   //console.log("ownStories was clicked");
-  console.debug("navMyStoriesClick", e);
+  //console.debug("navMyStoriesClick", e);
   $allStoriesList.hide();
   $addStoryForm.hide();
   $navMyStories.show();

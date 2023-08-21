@@ -1,3 +1,4 @@
+//contains code for starting the UI of the application, and other miscellaneous things.
 "use strict";
 
 // So we don't have to keep re-finding things on page, find DOM elements once:
@@ -22,8 +23,6 @@ const $addStoryForm = $(".addstory-form");
 const $favoriteStoriesList = $("#favorite-stories-list");
 const $myStoriesList = $("#my-stories-list");
 
-// const $clickedStar = $(".CLICKED");
-// const $unclickedStar = $(".UNCLICKED");
 
 
 /** To make it easier for individual components to show just themselves, this
@@ -37,6 +36,8 @@ function hidePageComponents() {
     $allStoriesList,
     $loginForm,
     $signupForm,
+    $favoriteStoriesList,
+    $myStoriesList,
   ];
   components.forEach(c => c.hide());
 }
@@ -53,6 +54,8 @@ async function start() {
   // if we got a logged-in user
   if (currentUser) updateUIOnUserLogin();
 }
+
+
 
 // Once the DOM is entirely loaded, begin the app
 

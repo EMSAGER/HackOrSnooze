@@ -1,3 +1,5 @@
+//contains classes to manage the data of the app and the connection to the API. The name models.js to describe a file containing these kinds of classes that focus on the data and logic about the data. UI stuff shouldn’t go here.
+
 "use strict";
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
@@ -240,6 +242,6 @@ class User {
       //true|false test of whether an element is true in array & returns the true elements
       // element.some(p1 => p2 === p3)
   isFavorite(story){
-    console.log( this.favorites.some(s => s.storyId === story.storyId));
+    return this.favorites.some(s => s.storyId === story.storyId);
   }
 }

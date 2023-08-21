@@ -1,3 +1,6 @@
+///this sheet User interface code for stories
+
+
 "use strict";
 
 // This is the global list of the stories, an instance of StoryList
@@ -24,11 +27,11 @@ function generateStoryMarkup(story) {
     //when generating story markup, the application should cehceck to see if a user is signed in first. 
     //call Boolean to check True/FAlse if user is signed in
       //if(signedIn !== false), show stars
-  const signedIn = Boolean(currentUser);
+  const showStar = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-     
+       ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -38,6 +41,8 @@ function generateStoryMarkup(story) {
       </li>
     `);
 }
+// ${showStar ? putStarsOnPageHTML(story, user) : ""}
+
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
@@ -54,7 +59,14 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+/**HTML markup for Stars*/
 
+function putStarsOnPageHTML(story, user){
+  const isFavorite = user.isFavorite(story);
+  const star = isFavorite? "fas" : "far";
+  return `<span class = "star">
+          <i class = "${star} fa-star"></i>`;
+}
 
 async function submitNewStoryForm(e){
   console.debug("submitNewStoryForm", e);
@@ -78,11 +90,30 @@ async function submitNewStoryForm(e){
                 //5. need to hide form but in a GRACEFUL manner not abrupt
   $addStoryForm.hide();
 }
-
 $addStoryForm.on("submit", submitNewStoryForm)
 
+//Functions of handling favorites
+        //1.Handling the favorite page list section
+        //2. clicking/unclicking (favorite/removing favorite )starts
 
+  //step 1: create a favorites page where the favorite list is displayed when (logged in & favorite)
 
-//allow users to favorite and unfavorite a story
+function putFavoriteOnListPage(){
+  console.debug("putFavoriteOnListPage");
+
+  $favoriteStoriesList.empty();
+  // loop through all of our stories and generate HTML for them
+  if(currentUser.favorites.length === 0){
+    $(".DEFAULT").show();
+  }  
+  else{
+    for (let story of currentUser.favorites) {
+      const $story = generateStoryMarkup(story);
+      $favoriteStoriesList.append($story);
+    }
+  }
+  $favoriteStoriesList.show();
+}
+
 
 
