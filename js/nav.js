@@ -44,6 +44,7 @@ function navStoryClick(e){
   //console.debug("navStoryClick", e);
   $addStoryForm.show();
   $allStoriesList.show();
+  $favoriteStoriesList.hide();
 }
 
 $navStorySubmit.on("click", navStoryClick);
@@ -54,6 +55,8 @@ function navFavoriteClick(e){
   //console.log("Favorite was clicked");
   console.debug("navFavoriteClick", e);
   $allStoriesList.hide();
+  $addStoryForm.hide();
+  $favoriteStoriesList.show();
   putFavoriteOnListPage();
 }
 
@@ -67,6 +70,7 @@ function navMyStoriesClick(e){
   $allStoriesList.hide();
   $addStoryForm.hide();
   $navMyStories.show();
+  //putMyStoriesonListPage();
 }
 
 $navMyStories.on("click", navMyStoriesClick);

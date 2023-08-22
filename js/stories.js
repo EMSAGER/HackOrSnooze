@@ -120,13 +120,29 @@ function putFavoriteOnListPage(){
     //async because: we are waiting for other data
   async function toggleFavoriteStar(e){
     const $target = $(e.target);
+    //console.log($target);
     const $targetLI = $target.closest("li");
     //console.log($targetLI);
     const $storyId = $targetLI.attr("id");
     //console.log($storyId);
     const story = storyList.stories.find(s => s.storyId === $storyId);
-    console.log(story);
+    //console.log(story);
+          //before you can toggle the class, we need to add/remove the story
+                  //problem 1: stars keep removing themselves from the list--wrong method used
 
+                  //problem 2: friendList is not removing the toggled/unfavorited stories
+    if($target.hasClass("fas")){
+      await currentUser.removeFavoriteStory(story);
+      //console.log($target);
+      $target.toggleClass("fas far");
+      $favoriteStoriesList.remove(story);
+      //console.log($target);
   }
+    else{
+      await currentUser.addFavoriteStory(story);
+      $target.toggleClass("fas far");
+  }
+}
 
 $allStoriesList.on("click", toggleFavoriteStar);
+$favoriteStoriesList.on("click", toggleFavoriteStar);
