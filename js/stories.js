@@ -115,5 +115,15 @@ function putFavoriteOnListPage(){
   $favoriteStoriesList.show();
 }
 
+  //step 2: switching from favorite to unfavorite via TOGGLING 
+  //things to consider: what will be the e.target? how will the star be chosen if its buried in code? where is it buried? is the location of burial the best place to click?
+    //async because: we are waiting for other data
+  async function toggleFavoriteStar(e){
+    const $target = $(e.target);
+    const $targetLI = $target.closest("li");
+    //console.log($targetLI);
+    const $storyId = $targetLI.closest("attr");
+    console.log($storyId);
+  }
 
-
+$allStoriesList.on("click", toggleFavoriteStar);
