@@ -122,8 +122,11 @@ function putFavoriteOnListPage(){
     const $target = $(e.target);
     const $targetLI = $target.closest("li");
     //console.log($targetLI);
-    const $storyId = $targetLI.closest("attr");
-    console.log($storyId);
+    const $storyId = $targetLI.attr("id");
+    //console.log($storyId);
+    const story = storyList.stories.find(s => s.storyId === $storyId);
+    console.log(story);
+
   }
 
 $allStoriesList.on("click", toggleFavoriteStar);
