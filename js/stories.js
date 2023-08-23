@@ -15,6 +15,7 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -68,6 +69,11 @@ function putStarsOnPageHTML(story, user){
           <i class = "${star} fa-star"></i>`;
 }
 
+/**HTML MARKUP FOR TRASHCANS */
+function putTrashCansOnPageHTML(story, user){
+  
+}
+
 async function submitNewStoryForm(e){
   console.debug("submitNewStoryForm", e);
   e.preventDefault(); //prevent a submit form default
@@ -85,6 +91,7 @@ async function submitNewStoryForm(e){
   const $story = generateStoryMarkup(story);
   //           //3. put new story on page
   $allStoriesList.prepend($story);
+  $myStoriesList.append($story);
                 //4. form isn't clearing - 
   $addStoryForm.trigger("reset");
                 //5. need to hide form but in a GRACEFUL manner not abrupt
@@ -92,6 +99,24 @@ async function submitNewStoryForm(e){
 }
 $addStoryForm.on("submit", submitNewStoryForm)
 
+///handle the my story form/list page
+
+// function putMyStoriesListPage(){
+//   console.debug("putMyStoriesListPage");
+  
+//   $myStoriesList.empty();
+
+//   if(currentUser.stories.length === 0){
+//     $(".DEFAULT").show();
+//   }
+//   else{
+//     for(let story of currentUser.stories){
+//       const $story = generateStoryMarkup(story);
+//       $myStoriesList.append($story);
+//     }
+//   }
+//   $myStoriesList.show();
+// }
 //Functions of handling favorites
         //1.Handling the favorite page list section
         //2. clicking/unclicking (favorite/removing favorite )starts
@@ -127,7 +152,7 @@ function putFavoriteOnListPage(){
     //console.log($storyId);
     const story = storyList.stories.find(s => s.storyId === $storyId);
     //console.log(story);
-          //before you can toggle the class, we need to add/remove the story
+                    //before you can toggle the class, we need to add/remove the story
                   //problem 1: stars keep removing themselves from the list--wrong method used
 
                   //problem 2: friendList is not removing the toggled/unfavorited stories
@@ -144,5 +169,24 @@ function putFavoriteOnListPage(){
   }
 }
 
-$allStoriesList.on("click", toggleFavoriteStar);
-$favoriteStoriesList.on("click", toggleFavoriteStar);
+          //this code didn't work until moved below the favorite List page
+
+          //step1 creating a list page for the stories
+function putMyStoryOnListPage(){
+  console.debug("putMyStoryOnListPage");
+  $myStoriesList.empty();
+  if(currentUser.ownStories.length === 0){
+    $(".DEFAULT").show();
+  }
+  else{
+    for(let story of currentUser.ownStories){
+      const $story = generateStoryMarkup(story);
+      $myStoriesList.append($story);
+    }
+  }
+  $myStoriesList.show();
+}
+$allStoriesList.on("click",".star", toggleFavoriteStar);
+$favoriteStoriesList.on("click",".star", toggleFavoriteStar);
+$myStoriesList.on("click",".star", toggleFavoriteStar);
+// $favoriteStoriesList.on("click", unFavoriteStoryOnList);
