@@ -93,6 +93,28 @@ async function submitNewStoryForm(e){
 }
 $addStoryForm.on("submit", submitNewStoryForm);
 
+/******************************************************************************
+ * now we need to add the user's submitted stories onto the mystories page
+ *
+ */
+function putUsersStoriesOnPage(){
+  console.debug("putUsersStoriesOnPage");
+
+  $myStoriesList.empty();
+
+  if(currentUser.ownStories.length === 0){
+    $myStoriesList.append("<h4>No Favorites Added</h4>");
+  }
+  else{
+    for (let story of currentUser.ownStories){
+      const $story = generateStoryMarkup(story);
+      $myStoriesList.append($story);
+    }
+  }
+  $myStoriesList.show();
+}
+
+
 //Functions of handling favorites
         //1.Handling the favorite page list section
         //2. clicking/unclicking (favorite/removing favorite )starts
@@ -105,7 +127,7 @@ function putFavoriteOnListPage(){
   $favoriteStoriesList.empty();
   // loop through all of our stories and generate HTML for them
   if(currentUser.favorites.length === 0){
-    $(".DEFAULT").show();
+    $favoriteStoriesList.append("<h4>No Favorites Added</h4>");
   }  
   else{
     for (let story of currentUser.favorites) {
@@ -145,5 +167,6 @@ function putFavoriteOnListPage(){
   }
 }
 
-$allStoriesList.on("click", toggleFavoriteStar);
-$favoriteStoriesList.on("click", toggleFavoriteStar);
+// $allStoriesList.on("click", toggleFavoriteStar);
+// $favoriteStoriesList.on("click", toggleFavoriteStar);
+$allThreeStories.on("click", toggleFavoriteStar);

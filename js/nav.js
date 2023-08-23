@@ -69,8 +69,8 @@ function navMyStoriesClick(e){
   console.debug("navMyStoriesClick", e);
   hidePageComponents();
   $myStoriesList.show();
-  
- // putMyStoryOnListPage();
+  putUsersStoriesOnPage()
+ 
 }
 
 $navMyStories.on("click", navMyStoriesClick);
