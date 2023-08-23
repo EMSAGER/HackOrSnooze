@@ -98,8 +98,14 @@ class StoryList {
   };
   
   async removeStory(user, storyId){
-    
-  }
+    const token = user.loginToken;
+    const response = await axios({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "DELETE",
+      data: {token},
+    });
+    console.log(response);
+  };
 }
 
 
