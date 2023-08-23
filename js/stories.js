@@ -29,10 +29,12 @@ function generateStoryMarkup(story) {
     //call Boolean to check True/FAlse if user is signed in
       //if(signedIn !== false), show stars
   const showStar = Boolean(currentUser);
+  // const deleteIcon = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
        ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
+       
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -43,7 +45,8 @@ function generateStoryMarkup(story) {
     `);
 }
 // ${showStar ? putStarsOnPageHTML(story, user) : ""}
-
+//${showTrash ? putTrashCansOnPageHTML() : ""}
+// ${deleteIcon ? putTrashCansOnPageHTML() : ""}
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
@@ -66,12 +69,15 @@ function putStarsOnPageHTML(story, user){
   const isFavorite = user.isFavorite(story);
   const star = isFavorite? "fas" : "far";
   return `<span class = "star">
-          <i class = "${star} fa-star"></i>`;
+          <i class = "${star} fa-star"></i>
+          </span>`;
 }
 
 /**HTML MARKUP FOR TRASHCANS */
-function putTrashCansOnPageHTML(story, user){
-  
+function putTrashCansOnPageHTML(){
+  return `<span class = "trashcan">
+          <i class = "fas fa-trash-alt"></i>
+          </span>`;
 }
 
 async function submitNewStoryForm(e){
@@ -95,9 +101,9 @@ async function submitNewStoryForm(e){
                 //4. form isn't clearing - 
   $addStoryForm.trigger("reset");
                 //5. need to hide form but in a GRACEFUL manner not abrupt
-  $addStoryForm.hide();
+  $addStoryForm.slideUp();
 }
-$addStoryForm.on("submit", submitNewStoryForm)
+$addStoryForm.on("submit", $("#addstory-button"), submitNewStoryForm());
 
 ///handle the my story form/list page
 
