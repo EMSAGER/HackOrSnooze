@@ -97,6 +97,9 @@ class StoryList {
     return story;
   };
   
+  async removeStory(user, storyId){
+    
+  }
 }
 
 

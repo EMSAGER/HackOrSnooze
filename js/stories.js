@@ -27,11 +27,11 @@ function generateStoryMarkup(story) {
     //when generating story markup, the application should cehceck to see if a user is signed in first. 
     //call Boolean to check True/FAlse if user is signed in
       //if(signedIn !== false), show stars
-  //const showStar = Boolean(currentUser);
+  const showStar = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-
+        ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -42,17 +42,17 @@ function generateStoryMarkup(story) {
     `);
 }
 // ${showStar ? putStarsOnPageHTML(story, user) : ""}
-//       ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
+//       
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 /**HTML markup for Stars*/
 
-// function putStarsOnPageHTML(story, user){
-//   const isFavorite = user.isFavorite(story);
-//   const star = isFavorite? "fas" : "far";
-//   return `<span class = "star">
-//           <i class = "${star} fa-star"></i>`;
-// }
+function putStarsOnPageHTML(story, user){
+  const isFavorite = user.isFavorite(story);
+  const star = isFavorite? "fas" : "far";
+  return `<span class = "star">
+          <i class = "${star} fa-star"></i>`;
+}
 
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
