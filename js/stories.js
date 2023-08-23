@@ -15,7 +15,6 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
-
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -28,13 +27,11 @@ function generateStoryMarkup(story) {
     //when generating story markup, the application should cehceck to see if a user is signed in first. 
     //call Boolean to check True/FAlse if user is signed in
       //if(signedIn !== false), show stars
-  const showStar = Boolean(currentUser);
-  // const deleteIcon = Boolean(currentUser);
+  //const showStar = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-       ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
-       
+
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -45,13 +42,20 @@ function generateStoryMarkup(story) {
     `);
 }
 // ${showStar ? putStarsOnPageHTML(story, user) : ""}
-//${showTrash ? putTrashCansOnPageHTML() : ""}
-// ${deleteIcon ? putTrashCansOnPageHTML() : ""}
+//       ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
+/**HTML markup for Stars*/
+
+// function putStarsOnPageHTML(story, user){
+//   const isFavorite = user.isFavorite(story);
+//   const star = isFavorite? "fas" : "far";
+//   return `<span class = "star">
+//           <i class = "${star} fa-star"></i>`;
+// }
 
 function putStoriesOnPage() {
-  //console.debug("putStoriesOnPage");
+  console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
 
@@ -60,28 +64,12 @@ function putStoriesOnPage() {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
   }
-
   $allStoriesList.show();
 }
-/**HTML markup for Stars*/
 
-function putStarsOnPageHTML(story, user){
-  const isFavorite = user.isFavorite(story);
-  const star = isFavorite? "fas" : "far";
-  return `<span class = "star">
-          <i class = "${star} fa-star"></i>
-          </span>`;
-}
-
-/**HTML MARKUP FOR TRASHCANS */
-function putTrashCansOnPageHTML(){
-  return `<span class = "trashcan">
-          <i class = "fas fa-trash-alt"></i>
-          </span>`;
-}
 
 async function submitNewStoryForm(e){
-  console.debug("submitNewStoryForm", e);
+  console.debug("submitNewStoryForm");
   e.preventDefault(); //prevent a submit form default
             //1.add your constants from the form
   const title = $("#addstory-title").val();
@@ -97,32 +85,14 @@ async function submitNewStoryForm(e){
   const $story = generateStoryMarkup(story);
   //           //3. put new story on page
   $allStoriesList.prepend($story);
-  $myStoriesList.append($story);
                 //4. form isn't clearing - 
+  $addStoryForm.slideUp("slow");
   $addStoryForm.trigger("reset");
                 //5. need to hide form but in a GRACEFUL manner not abrupt
-  $addStoryForm.slideUp();
-}
-$addStoryForm.on("submit", $("#addstory-button"), submitNewStoryForm());
-
-///handle the my story form/list page
-
-// function putMyStoriesListPage(){
-//   console.debug("putMyStoriesListPage");
   
-//   $myStoriesList.empty();
+}
+$addStoryForm.on("submit", submitNewStoryForm);
 
-//   if(currentUser.stories.length === 0){
-//     $(".DEFAULT").show();
-//   }
-//   else{
-//     for(let story of currentUser.stories){
-//       const $story = generateStoryMarkup(story);
-//       $myStoriesList.append($story);
-//     }
-//   }
-//   $myStoriesList.show();
-// }
 //Functions of handling favorites
         //1.Handling the favorite page list section
         //2. clicking/unclicking (favorite/removing favorite )starts
@@ -158,41 +128,22 @@ function putFavoriteOnListPage(){
     //console.log($storyId);
     const story = storyList.stories.find(s => s.storyId === $storyId);
     //console.log(story);
-                    //before you can toggle the class, we need to add/remove the story
+          //before you can toggle the class, we need to add/remove the story
                   //problem 1: stars keep removing themselves from the list--wrong method used
 
                   //problem 2: friendList is not removing the toggled/unfavorited stories
     if($target.hasClass("fas")){
       await currentUser.removeFavoriteStory(story);
       //console.log($target);
-      $target.toggleClass("fas far");
-      $favoriteStoriesList.remove(story);
+      $target.closest("i").toggleClass("fas far");
+      //$favoriteStoriesList.remove(story);
       //console.log($target);
   }
     else{
       await currentUser.addFavoriteStory(story);
-      $target.toggleClass("fas far");
+      $target.closest("i").toggleClass("fas far");
   }
 }
 
-          //this code didn't work until moved below the favorite List page
-
-          //step1 creating a list page for the stories
-function putMyStoryOnListPage(){
-  console.debug("putMyStoryOnListPage");
-  $myStoriesList.empty();
-  if(currentUser.ownStories.length === 0){
-    $(".DEFAULT").show();
-  }
-  else{
-    for(let story of currentUser.ownStories){
-      const $story = generateStoryMarkup(story);
-      $myStoriesList.append($story);
-    }
-  }
-  $myStoriesList.show();
-}
-$allStoriesList.on("click",".star", toggleFavoriteStar);
-$favoriteStoriesList.on("click",".star", toggleFavoriteStar);
-$myStoriesList.on("click",".star", toggleFavoriteStar);
-// $favoriteStoriesList.on("click", unFavoriteStoryOnList);
+$allStoriesList.on("click", toggleFavoriteStar);
+$favoriteStoriesList.on("click", toggleFavoriteStar);

@@ -92,28 +92,11 @@ class StoryList {
           //need to create a new Story instance
     const story = new Story(response.data.story);
     this.stories.unshift(story);
-    this.ownStories.unshift(story);
-
+    user.ownStories.unshift(story);
+    //console.log(story);
     return story;
-  }
-//allow user to delete a story
-        //to delete a story requirements:
-  async removeUserStory(user, storyId){
-  const token = user.loginToken;
-  await axios({
-    url: `${BASE_URL}/stories/${storyId}`,
-    method: "DELETE",
-    data: {token},
-    });
-          //filter out like above    
-  this.stories = this.stories.filter(s => s.storyId !== storyId); 
-  user.ownStories = user.ownStories.filter(s=> s.storyId !== storyId);
-  user.favorites = user.favorites.filter(s=> s.storyId !== storyId);
-
-  // isUserStory(story){
-  //   return this.ownStories.filter(s=> s.username === story.username);
-  // }  
-  }
+  };
+  
 }
 
 
@@ -231,12 +214,13 @@ class User {
       return null;
     }
   }
-
-      //allow user to favorite a story
+        //allow user to favorite a story
   async addFavoriteStory(story){
     this.favorites.push(story);
     await this.addOrRemoveFavorite("add",story);
   }
+
+
 
         //filter will find the favorites to remove selected story 
   async removeFavoriteStory(story){
@@ -262,13 +246,25 @@ class User {
   isFavorite(story){
     return this.favorites.some(s => s.storyId === story.storyId);
   }
+  // removeUserStory(story){
+  //   this.ownStories = this.ownStories.filter(s=> s.username !== story.username);
+  //   StoryList.remove()
+  // }
 
+  // isUserStory(story){
+  //   return this.ownStories.filter(s=> s.username === story.username);
+  // }
 } 
 
 
 
-
-
-
-
-
+      // //allow user to delete a story
+      //          //to delete a story requirements:
+      //          async removeUserStory(story){
+      //           const token = this.loginToken;
+      //           await axios({
+      //             url: `${BASE_URL}/stories/${story.storyId}`,
+      //             method: "DELETE",
+      //             data: {token},
+      //           });
+      //         }

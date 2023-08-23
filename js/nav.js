@@ -70,7 +70,7 @@ function navMyStoriesClick(e){
   hidePageComponents();
   $myStoriesList.show();
   
-  putMyStoryOnListPage();
+ // putMyStoryOnListPage();
 }
 
 $navMyStories.on("click", navMyStoriesClick);

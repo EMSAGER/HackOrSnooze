@@ -1,3 +1,4 @@
+
 //contains code for starting the UI of the application, and other miscellaneous things.
 "use strict";
 
@@ -19,7 +20,7 @@ const $navStorySubmit = $("#nav-story-submit");
 const $navfavorite = $("#nav-favorite");
 const $navMyStories = $("#nav-my-story");
 
-const $addStoryForm = $(".addstory-form");
+const $addStoryForm = $("#addstory-form");
 const $favoriteStoriesList = $("#favorite-stories-list");
 const $myStoriesList = $("#my-stories-list");
 
