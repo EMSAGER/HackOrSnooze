@@ -40,10 +40,13 @@ async function signup(e) {
   const name = $("#signup-name").val();
   const username = $("#signup-username").val();
   const password = $("#signup-password").val();
-
+  
   // User.signup retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
+
   currentUser = await User.signup(username, password, name);
+
+  // if(currentUser.username !== storedName)
 
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
@@ -109,10 +112,14 @@ function saveUserCredentialsInLocalStorage() {
  * - generate the user profile part of the page
  */
 
-function updateUIOnUserLogin() {
+async function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
+  hidePageComponents();
+
+  putStoriesOnPage();
   $allStoriesList.show();
+  
 
   updateNavOnLogin();
 }

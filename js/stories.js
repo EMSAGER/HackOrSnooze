@@ -125,7 +125,7 @@ function putUsersStoriesOnPage(){
   }
   else{
     for (let story of currentUser.ownStories){
-      const $story = generateStoryMarkup(story, showTrash = true);
+      const $story = generateStoryMarkup(story, true);
       $myStoriesList.append($story);
     }
   }
