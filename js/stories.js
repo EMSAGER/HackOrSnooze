@@ -22,15 +22,17 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 
-function generateStoryMarkup(story) {
+function generateStoryMarkup(story, showTrash = false) {
   // console.debug("generateStoryMarkup", story);
     //when generating story markup, the application should cehceck to see if a user is signed in first. 
     //call Boolean to check True/FAlse if user is signed in
       //if(signedIn !== false), show stars
+  
   const showStar = Boolean(currentUser);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
+        ${showTrash ? showTrashCans() : ''}
         ${showStar ? putStarsOnPageHTML(story, currentUser) : ''}
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
@@ -45,15 +47,21 @@ function generateStoryMarkup(story) {
 //       
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
+/**HTML MARKUP FOR BASURA */
+function showTrashCans(){
+  return `<span class = "trash">
+            <i class = "fas fa-trash-alt">
+            </i></span>`;
+}
 /**HTML markup for Stars*/
-
 function putStarsOnPageHTML(story, user){
   const isFavorite = user.isFavorite(story);
   const star = isFavorite? "fas" : "far";
   return `<span class = "star">
-          <i class = "${star} fa-star"></i>`;
+          <i class = "${star} fa-star"></i></span>`;
 }
 
+//puts the stories on the pages
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
 
@@ -66,8 +74,18 @@ function putStoriesOnPage() {
   }
   $allStoriesList.show();
 }
+//user deletes a story
 
+async function deleteStory(e){
+  console.debug("deleteStory");
+  const storyId = $(e.target).closest("li").attr("id");
+  await storyList.removeStory(currentUser, storyId);
+  putStoriesOnPage();
+}
 
+$myStoriesList.on("click", deleteStory);
+
+//user submits a new story
 async function submitNewStoryForm(e){
   console.debug("submitNewStoryForm");
   e.preventDefault(); //prevent a submit form default
@@ -103,11 +121,11 @@ function putUsersStoriesOnPage(){
   $myStoriesList.empty();
 
   if(currentUser.ownStories.length === 0){
-    $myStoriesList.append("<h4>No Favorites Added</h4>");
+    $myStoriesList.append("<h4>No stories submitted</h4>");
   }
   else{
     for (let story of currentUser.ownStories){
-      const $story = generateStoryMarkup(story);
+      const $story = generateStoryMarkup(story, showTrash = true);
       $myStoriesList.append($story);
     }
   }
