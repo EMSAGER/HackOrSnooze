@@ -41,12 +41,19 @@ async function signup(e) {
   const username = $("#signup-username").val();
   const password = $("#signup-password").val();
   
+
+  
   // User.signup retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
+  // let allUsers = localStorage.getItem("allUsers");
+  // console.log(allUsers);
+  // if (allUsers === null){
+  //   allUsers = [];
+  // }
+  
 
   currentUser = await User.signup(username, password, name);
 
-  // if(currentUser.username !== storedName)
 
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
@@ -98,6 +105,7 @@ function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
     localStorage.setItem("token", currentUser.loginToken);
     localStorage.setItem("username", currentUser.username);
+
   }
 }
 
