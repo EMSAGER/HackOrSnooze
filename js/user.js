@@ -31,6 +31,16 @@ async function login(e) {
 
 $loginForm.on("submit", login);
 
+// async function getUsers(){
+//   const token = localStorage.getItem("token");
+//   const response = await axios ({
+//     url: `${BASE_URL}/users?`,
+//     method: "GET",
+//     data: {token : token}
+//   })
+//   if(response.data);
+// }
+
 /** Handle signup form submission. */
 
 async function signup(e) {
@@ -53,7 +63,7 @@ async function signup(e) {
   
 
   currentUser = await User.signup(username, password, name);
-
+  
 
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
@@ -62,6 +72,7 @@ async function signup(e) {
 }
 
 $signupForm.on("submit", signup);
+
 
 /** Handle click of logout button
  *

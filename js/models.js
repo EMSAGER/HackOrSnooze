@@ -151,24 +151,29 @@ class User {
    */
 
   static async signup(username, password, name) {
-    const response = await axios({
-      url: `${BASE_URL}/signup`,
-      method: "POST",
-      data: { user: { username, password, name } },
-    });
+  try{
+      const response = await axios({
+        url: `${BASE_URL}/signup`,
+        method: "POST",
+        data: { user: { username, password, name } },
+      });
 
-    let { user } = response.data;
+      let { user } = response.data;
 
-    return new User(
-      {
-        username: user.username,
-        name: user.name,
-        createdAt: user.createdAt,
-        favorites: user.favorites,
-        ownStories: user.stories
-      },
-      response.data.token
-    );
+      return new User(
+        {
+          username: user.username,
+          name: user.name,
+          createdAt: user.createdAt,
+          favorites: user.favorites,
+          ownStories: user.stories
+        },
+        response.data.token
+      );
+    } catch (err){
+        alert("Username is already taken.", err);
+  
+    };
   }
 
   /** Login in user with API, make User instance & return it.
@@ -178,24 +183,28 @@ class User {
    */
 
   static async login(username, password) {
-    const response = await axios({
-      url: `${BASE_URL}/login`,
-      method: "POST",
-      data: { user: { username, password } },
-    });
+    try{
+        const response = await axios({
+        url: `${BASE_URL}/login`,
+        method: "POST",
+        data: { user: { username, password } },
+      });
 
-    let { user } = response.data;
+      let { user } = response.data;
 
-    return new User(
-      {
-        username: user.username,
-        name: user.name,
-        createdAt: user.createdAt,
-        favorites: user.favorites,
-        ownStories: user.stories
-      },
-      response.data.token
-    );
+      return new User(
+        {
+          username: user.username,
+          name: user.name,
+          createdAt: user.createdAt,
+          favorites: user.favorites,
+          ownStories: user.stories
+        },
+        response.data.token
+      );
+    } catch (err){
+      alert("Login credentials failed.", err);
+    }
   }
 
   /** When we already have credentials (token & username) for a user,
@@ -223,9 +232,9 @@ class User {
         token
       );
     } catch (err) {
-      console.error("loginViaStoredCredentials failed", err);
-      return null;
-    }
+        console.error("loginViaStoredCredentials failed", err);
+        return null;
+    };
   }
 
         //allow user to favorite a story
