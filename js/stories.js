@@ -74,6 +74,13 @@ function putStoriesOnPage() {
   }
   $allStoriesList.show();
 }
+
+//user can edit a story
+async function editStory(e){
+  console.debug("editStory", e);
+  const story = $(e.target).closest("li");
+}
+
 //user deletes a story
 
 async function deleteStory(e){

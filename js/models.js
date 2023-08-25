@@ -11,16 +11,17 @@ const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 class Story {
 
   /** Make instance of Story from data object about story:
-   *   - {title, author, url, username, storyId, createdAt}
+   *   - {title, author, url, username, storyId, createdAt, updatedAt}
    */
 
-  constructor({ storyId, title, author, url, username, createdAt }) {
+  constructor({ storyId, title, author, url, username, createdAt, updatedAt }) {
     this.storyId = storyId;
     this.title = title;
     this.author = author;
     this.url = url;
     this.username = username;
     this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 
   /** Parses hostname out of URL and returns it. */
@@ -110,6 +111,15 @@ class StoryList {
     user.ownStories = user.ownStories.filter(s => s.storyId !== storyId);
     user.favorites = user.favorites.filter(s => s.storyId !== storyId);
   };
+
+  async editStory(storyId){
+    const token = user.loginToken;
+    const editAuthor = 
+    await axios ({
+      url: `${BASE_URL}/stories/${storyId}`,
+      method: "PATCH"
+    })
+  }
 }
 
 
@@ -119,7 +129,7 @@ class StoryList {
 
 class User {
   /** Make user instance from obj of user data and a token:
-   *   - {username, name, createdAt, favorites[], ownStories[]}
+   *   - {username, name, createdAt, updatedAt, favorites[], ownStories[]}
    *   - token
    */
 
@@ -127,6 +137,7 @@ class User {
                 username,
                 name,
                 createdAt,
+                updatedAt,
                 favorites = [],
                 ownStories = []
               },
@@ -134,6 +145,7 @@ class User {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
 
     // instantiate Story instances for the user's favorites and ownStories
     this.favorites = favorites.map(s => new Story(s));
@@ -226,6 +238,7 @@ class User {
           username: user.username,
           name: user.name,
           createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
           favorites: user.favorites,
           ownStories: user.stories
         },
