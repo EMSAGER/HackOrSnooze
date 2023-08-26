@@ -76,10 +76,12 @@ function putStoriesOnPage() {
 }
 
 //user can edit a story
-async function editStory(e){
-  console.debug("editStory", e);
-  const story = $(e.target).closest("li");
-}
+// async function editStory(e){
+//   console.debug("editStory", e);
+//   const storyId = $(e.target).closest("li").attr("id");
+//   await storyList.editStory(storyId);
+//   putStoriesOnPage();
+// }
 
 //user deletes a story
 

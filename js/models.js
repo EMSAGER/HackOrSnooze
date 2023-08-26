@@ -112,14 +112,27 @@ class StoryList {
     user.favorites = user.favorites.filter(s => s.storyId !== storyId);
   };
 
-  async editStory(storyId){
-    const token = user.loginToken;
-    const editAuthor = 
-    await axios ({
-      url: `${BASE_URL}/stories/${storyId}`,
-      method: "PATCH"
-    })
-  }
+  // async editStory(user, storyId){
+  //   const storyData = awa
+  //   const token = user.loginToken;
+  //   const newStory = await axios ({
+  //     url: `${BASE_URL}/stories/${storyId}`,
+  //     method: "PATCH",
+  //     data:{
+  //           token : token, 
+  //           story : {
+  //             author: newAuthor,
+  //             title: newTitle,
+  //             url: newURL
+  //               }
+  //           }
+  //         });
+  //   const $newStory = generateStoryMarkup(newStory);
+  //   $allStoriesList.prepend($newStory);
+  //   $editStoryForm.slideUp("slow");
+  //   $editStoryForm.trigger("reset");
+
+  // }
 }
 
 
