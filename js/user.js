@@ -139,7 +139,20 @@ async function updateUIOnUserLogin() {
   putStoriesOnPage();
   $allStoriesList.show();
   
-
   updateNavOnLogin();
+  //generate a user's profile
+  generateUserProfile();
 }
 
+//user profile page
+function generateUserProfile(){
+  console.debug("generateUserProfile");
+
+  $("#profile-name").text(currentUser.name);
+
+  $("#profile-username").text(currentUser.username);
+
+  $("#profile-account-date").text(currentUser.createdAt.slice(0,10));
+
+
+}

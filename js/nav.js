@@ -28,20 +28,11 @@ function navLoginClick(e) {
 
 $navLogin.on("click", navLoginClick);
 
-/** When a user first logins in, update the navbar to reflect that. */
-
-function updateNavOnLogin() {
-  //console.debug("updateNavOnLogin");
-  $(".nav-link").show();
-  $navLogin.hide();
-  $navLogOut.show();
-  $navUserProfile.text(`${currentUser.username}`).show();
-}
 
 /** When a signed in user clicks on submit nav bar, the add story form will show */
 function navStoryClick(e){
   // console.log("submit was clicked");
-  //console.debug("navStoryClick", e);
+  console.debug("navStoryClick", e);
   $addStoryForm.show();
   $allStoriesList.show();
   $favoriteStoriesList.hide();
@@ -74,3 +65,23 @@ function navMyStoriesClick(e){
 }
 
 $navMyStories.on("click", navMyStoriesClick);
+
+/**Handling a profile click */
+function navProfileClick(e){
+  console.debug("navProfileClick", e);
+  hidePageComponents();
+  $userProfile.show();
+}
+
+$navUserProfile.on("click", navProfileClick);
+
+/** When a user first logins in, update the navbar to reflect that. */
+/**put at the end to cover all other functions first. we dont want the program to stop running as soon as it reads the first code */
+
+function updateNavOnLogin() {
+  console.debug("updateNavOnLogin");
+  $(".nav-link").show();
+  $navLogin.hide();
+  $navLogOut.show();
+  $navUserProfile.text(`${currentUser.username}`).show();
+}
