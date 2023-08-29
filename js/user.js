@@ -31,15 +31,6 @@ async function login(e) {
 
 $loginForm.on("submit", login);
 
-// async function getUsers(){
-//   const token = localStorage.getItem("token");
-//   const response = await axios ({
-//     url: `${BASE_URL}/users?`,
-//     method: "GET",
-//     data: {token : token}
-//   })
-//   if(response.data);
-// }
 
 /** Handle signup form submission. */
 
@@ -51,17 +42,6 @@ async function signup(e) {
   const username = $("#signup-username").val();
   const password = $("#signup-password").val();
   
-
-  
-  // User.signup retrieves user info from API and returns User instance
-  // which we'll make the globally-available, logged-in user.
-  // let allUsers = localStorage.getItem("allUsers");
-  // console.log(allUsers);
-  // if (allUsers === null){
-  //   allUsers = [];
-  // }
-  
-
   currentUser = await User.signup(username, password, name);
   
 
@@ -156,3 +136,6 @@ function generateUserProfile(){
 
 
 }
+
+//handle user edit
+//get items from local storage and reset them 
