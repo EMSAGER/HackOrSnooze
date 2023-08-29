@@ -41,6 +41,7 @@ function hidePageComponents() {
     $signupForm,
     $favoriteStoriesList,
     $myStoriesList,
+    $userProfile
   ];
   components.forEach(c => c.hide());
 }
